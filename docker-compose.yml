@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  opus-transcriber:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3846:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
