@@ -40,7 +40,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileSelect, disabled }) => {
     const isOpusExtension = file.name.toLowerCase().endsWith('.opus');
     const isOggMime = file.type === 'audio/ogg';
     const isOggExtension = file.name.toLowerCase().endsWith('.ogg');
-    return isOpusMime || isOpusExtension || isOggMime || isOggExtension;
+    const isM4aMime = file.type === 'audio/m4a' || file.type === 'audio/mp4';
+    const isM4aExtension = file.name.toLowerCase().endsWith('.m4a');
+    return isOpusMime || isOpusExtension || isOggMime || isOggExtension || isM4aMime || isM4aExtension;
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +50,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileSelect, disabled }) => {
     if (isValidFile(file)) {
       onFileSelect(file);
     } else {
-        alert('Please select an .opus or .ogg file.');
+        alert('Please select an .opus, .ogg, or .m4a file.');
     }
   };
 
@@ -62,7 +64,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileSelect, disabled }) => {
     if (isValidFile(file)) {
       onFileSelect(file);
     } else {
-        alert('Please drop an .opus or .ogg file.');
+        alert('Please drop an .opus, .ogg, or .m4a file.');
     }
   };
 
@@ -101,7 +103,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileSelect, disabled }) => {
       <input
         ref={fileInputRef}
         type="file"
-        accept="audio/opus,audio/ogg"
+        accept="audio/opus,audio/ogg,audio/m4a,audio/mp4"
         onChange={handleFileChange}
         className="hidden"
         disabled={disabled}
@@ -110,7 +112,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileSelect, disabled }) => {
       <p className="text-center text-slate-400">
         <span className="font-semibold text-sky-400">Click to upload</span> or drag and drop
       </p>
-      <p className="text-xs text-slate-500 mt-2">OPUS or OGG audio files only</p>
+      <p className="text-xs text-slate-500 mt-2">OPUS, OGG, or M4A audio files only</p>
     </div>
   );
 };
@@ -207,6 +209,8 @@ export default function App() {
             mimeType = 'audio/opus';
         } else if (extension === 'ogg') {
             mimeType = 'audio/ogg';
+        } else if (extension === 'm4a') {
+            mimeType = 'audio/m4a';
         } else {
             mimeType = 'application/octet-stream'; 
         }
@@ -228,7 +232,7 @@ export default function App() {
       <div className="w-full max-w-4xl mx-auto flex flex-col items-center space-y-8">
         <header className="text-center">
             <h1 className="text-4xl sm:text-5xl font-bold text-sky-400 tracking-tight">Opus AI Transcriber</h1>
-            <p className="mt-4 text-lg text-slate-300">Upload an Opus or Ogg audio file and let AI turn it into text.</p>
+            <p className="mt-4 text-lg text-slate-300">Upload an Opus, Ogg, or M4A audio file and let AI turn it into text.</p>
         </header>
 
         <main className="w-full flex flex-col items-center space-y-6">
