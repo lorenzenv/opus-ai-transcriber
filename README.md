@@ -61,4 +61,4 @@ The app is configured to:
 - Map to host port 3846
 - Use German language transcription
 - Include speaker labels and punctuation
-- Handle files up to 50MB# opus-ai-transcriber
+- Handle files up to 50MB
